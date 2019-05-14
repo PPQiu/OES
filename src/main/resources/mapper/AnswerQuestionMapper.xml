@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.aitechlab.oes.dao.AnswerQuestionMapper" >
+  <resultMap id="BaseResultMap" type="cn.aitechlab.oes.model.AnswerQuestion" >
+
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="select_answer" property="selectAnswer" jdbcType="VARCHAR" />
+    <result column="mark_score" property="markScore" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, select_answer, mark_score
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from answer_question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from answer_question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.aitechlab.oes.model.AnswerQuestion" >
+
+    insert into answer_question (id, select_answer, mark_score
+      )
+    values (#{id,jdbcType=INTEGER}, #{selectAnswer,jdbcType=VARCHAR}, #{markScore,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.aitechlab.oes.model.AnswerQuestion" >
+
+    insert into answer_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="selectAnswer != null" >
+        select_answer,
+      </if>
+      <if test="markScore != null" >
+        mark_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="selectAnswer != null" >
+        #{selectAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="markScore != null" >
+        #{markScore,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.aitechlab.oes.model.AnswerQuestion" >
+
+    update answer_question
+    <set >
+      <if test="selectAnswer != null" >
+        select_answer = #{selectAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="markScore != null" >
+        mark_score = #{markScore,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.aitechlab.oes.model.AnswerQuestion" >
+
+    update answer_question
+    set select_answer = #{selectAnswer,jdbcType=VARCHAR},
+      mark_score = #{markScore,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

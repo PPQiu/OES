@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.aitechlab.oes.dao.PaperMapper" >
+  <resultMap id="BaseResultMap" type="cn.aitechlab.oes.model.Paper" >
+
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="paper_name" property="paperName" jdbcType="VARCHAR" />
+    <result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="exam_date" property="examDate" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="peoples" property="peoples" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="publish" property="publish" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, paper_name, subject_name, create_time, exam_date, start_time, end_time, peoples, 
+    remark, publish
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from paper
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from paper
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.aitechlab.oes.model.Paper" >
+
+    insert into paper (id, paper_name, subject_name, 
+      create_time, exam_date, start_time, 
+      end_time, peoples, remark, 
+      publish)
+    values (#{id,jdbcType=INTEGER}, #{paperName,jdbcType=VARCHAR}, #{subjectName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{examDate,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{peoples,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{publish,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.aitechlab.oes.model.Paper" >
+
+    insert into paper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="paperName != null" >
+        paper_name,
+      </if>
+      <if test="subjectName != null" >
+        subject_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="examDate != null" >
+        exam_date,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="peoples != null" >
+        peoples,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="publish != null" >
+        publish,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paperName != null" >
+        #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectName != null" >
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="examDate != null" >
+        #{examDate,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="peoples != null" >
+        #{peoples,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null" >
+        #{publish,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.aitechlab.oes.model.Paper" >
+
+    update paper
+    <set >
+      <if test="paperName != null" >
+        paper_name = #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectName != null" >
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="examDate != null" >
+        exam_date = #{examDate,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="peoples != null" >
+        peoples = #{peoples,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null" >
+        publish = #{publish,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.aitechlab.oes.model.Paper" >
+
+    update paper
+    set paper_name = #{paperName,jdbcType=VARCHAR},
+      subject_name = #{subjectName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      exam_date = #{examDate,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      peoples = #{peoples,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      publish = #{publish,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectPaperInfoIsPublish" resultMap="BaseResultMap">
+    select *
+    from paper
+    where publish="true" order by id asc;
+  </select>
+
+  <select id="selectAllPaperInfo" resultMap="BaseResultMap">
+    select *
+    from paper
+    order by id asc;
+  </select>
+
+  <select id="selectIdByPaperName" parameterType="java.lang.Integer">
+    select id
+    from paper
+    where paper_name = #{paperName};
+  </select>
+
+
+</mapper>
